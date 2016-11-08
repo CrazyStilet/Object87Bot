@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Object87BotModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Object87BotModelStoreContainer">
+    <EntitySet Name="PlayerSet" EntityType="Object87BotModel.Store.PlayerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ItemsSet" EntityType="Object87BotModel.Store.ItemsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KeysSet" EntityType="Object87BotModel.Store.KeysSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FlashlightSet" EntityType="Object87BotModel.Store.FlashlightSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BlueKeySet" EntityType="Object87BotModel.Store.BlueKeySet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GreenKeySet" EntityType="Object87BotModel.Store.GreenKeySet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PlayersItems" Association="Object87BotModel.Store.PlayersItems">
+      <End Role="Player" EntitySet="PlayerSet" />
+      <End Role="Items" EntitySet="ItemsSet" />
+    </AssociationSet>
+    <AssociationSet Name="ItemsKeys" Association="Object87BotModel.Store.ItemsKeys">
+      <End Role="Items" EntitySet="ItemsSet" />
+      <End Role="Keys" EntitySet="KeysSet" />
+    </AssociationSet>
+    <AssociationSet Name="KeysBlueKey" Association="Object87BotModel.Store.KeysBlueKey">
+      <End Role="Keys" EntitySet="KeysSet" />
+      <End Role="BlueKey" EntitySet="BlueKeySet" />
+    </AssociationSet>
+    <AssociationSet Name="KeysGreenKey" Association="Object87BotModel.Store.KeysGreenKey">
+      <End Role="Keys" EntitySet="KeysSet" />
+      <End Role="GreenKey" EntitySet="GreenKeySet" />
+    </AssociationSet>
+    <AssociationSet Name="ItemsFlashlight" Association="Object87BotModel.Store.ItemsFlashlight">
+      <End Role="Items" EntitySet="ItemsSet" />
+      <End Role="Flashlight" EntitySet="FlashlightSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PlayerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="Location" Type="int" Nullable="false" />
+    <Property Name="Position" Type="int" Nullable="false" />
+    <Property Name="Health" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ItemsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Players_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KeysSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Items_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FlashlightSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Items_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BlueKeySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Keys_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GreenKeySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Keys_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="PlayersItems">
+    <End Role="Player" Type="Object87BotModel.Store.PlayerSet" Multiplicity="1" />
+    <End Role="Items" Type="Object87BotModel.Store.ItemsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Player">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Items">
+        <PropertyRef Name="Players_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemsKeys">
+    <End Role="Items" Type="Object87BotModel.Store.ItemsSet" Multiplicity="1" />
+    <End Role="Keys" Type="Object87BotModel.Store.KeysSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Items">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Keys">
+        <PropertyRef Name="Items_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KeysBlueKey">
+    <End Role="Keys" Type="Object87BotModel.Store.KeysSet" Multiplicity="1" />
+    <End Role="BlueKey" Type="Object87BotModel.Store.BlueKeySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Keys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BlueKey">
+        <PropertyRef Name="Keys_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KeysGreenKey">
+    <End Role="Keys" Type="Object87BotModel.Store.KeysSet" Multiplicity="1" />
+    <End Role="GreenKey" Type="Object87BotModel.Store.GreenKeySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Keys">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GreenKey">
+        <PropertyRef Name="Keys_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemsFlashlight">
+    <End Role="Items" Type="Object87BotModel.Store.ItemsSet" Multiplicity="1" />
+    <End Role="Flashlight" Type="Object87BotModel.Store.FlashlightSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Items">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Flashlight">
+        <PropertyRef Name="Items_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

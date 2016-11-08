@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Object87Bot.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BlueKeySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Keys_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FlashlightSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Items_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GreenKeySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Keys_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ItemsSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Players_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KeysSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Items_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="Location" Type="int" Nullable="false" />
+    <Property Name="Position" Type="int" Nullable="false" />
+    <Property Name="Health" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ItemsFlashlight">
+    <End Role="ItemsSet" Type="Self.ItemsSet" Multiplicity="1" />
+    <End Role="FlashlightSet" Type="Self.FlashlightSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemsSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FlashlightSet">
+        <PropertyRef Name="Items_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItemsKeys">
+    <End Role="ItemsSet" Type="Self.ItemsSet" Multiplicity="1" />
+    <End Role="KeysSet" Type="Self.KeysSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemsSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KeysSet">
+        <PropertyRef Name="Items_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KeysBlueKey">
+    <End Role="KeysSet" Type="Self.KeysSet" Multiplicity="1" />
+    <End Role="BlueKeySet" Type="Self.BlueKeySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeysSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BlueKeySet">
+        <PropertyRef Name="Keys_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KeysGreenKey">
+    <End Role="KeysSet" Type="Self.KeysSet" Multiplicity="1" />
+    <End Role="GreenKeySet" Type="Self.GreenKeySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeysSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="GreenKeySet">
+        <PropertyRef Name="Keys_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PlayersItems">
+    <End Role="PlayerSet" Type="Self.PlayerSet" Multiplicity="1" />
+    <End Role="ItemsSet" Type="Self.ItemsSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlayerSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItemsSet">
+        <PropertyRef Name="Players_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Object87BotStoreContainer">
+    <EntitySet Name="BlueKeySet" EntityType="Self.BlueKeySet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FlashlightSet" EntityType="Self.FlashlightSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GreenKeySet" EntityType="Self.GreenKeySet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemsSet" EntityType="Self.ItemsSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KeysSet" EntityType="Self.KeysSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlayerSet" EntityType="Self.PlayerSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ItemsFlashlight" Association="Self.FK_ItemsFlashlight">
+      <End Role="ItemsSet" EntitySet="ItemsSet" />
+      <End Role="FlashlightSet" EntitySet="FlashlightSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItemsKeys" Association="Self.FK_ItemsKeys">
+      <End Role="ItemsSet" EntitySet="ItemsSet" />
+      <End Role="KeysSet" EntitySet="KeysSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KeysBlueKey" Association="Self.FK_KeysBlueKey">
+      <End Role="KeysSet" EntitySet="KeysSet" />
+      <End Role="BlueKeySet" EntitySet="BlueKeySet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KeysGreenKey" Association="Self.FK_KeysGreenKey">
+      <End Role="KeysSet" EntitySet="KeysSet" />
+      <End Role="GreenKeySet" EntitySet="GreenKeySet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PlayersItems" Association="Self.FK_PlayersItems">
+      <End Role="PlayerSet" EntitySet="PlayerSet" />
+      <End Role="ItemsSet" EntitySet="ItemsSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

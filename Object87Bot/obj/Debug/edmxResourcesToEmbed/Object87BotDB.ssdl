@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Object87BotDB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="InventorySet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Player_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="bigint" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Position" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PlayerInventory">
+    <End Role="PlayerSet" Type="Self.PlayerSet" Multiplicity="1" />
+    <End Role="InventorySet" Type="Self.InventorySet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlayerSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InventorySet">
+        <PropertyRef Name="Player_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Object87BotDBStoreContainer">
+    <EntitySet Name="InventorySet" EntityType="Self.InventorySet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PlayerSet" EntityType="Self.PlayerSet" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PlayerInventory" Association="Self.FK_PlayerInventory">
+      <End Role="PlayerSet" EntitySet="PlayerSet" />
+      <End Role="InventorySet" EntitySet="InventorySet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

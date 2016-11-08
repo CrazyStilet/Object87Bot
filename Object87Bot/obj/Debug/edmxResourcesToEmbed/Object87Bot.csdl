@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Object87Bot" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Object87BotContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PlayerSet" EntityType="Object87Bot.Player" />
+    <EntitySet Name="ItemsSet" EntityType="Object87Bot.Items" />
+    <AssociationSet Name="PlayersItems" Association="Object87Bot.PlayersItems">
+      <End Role="Players" EntitySet="PlayerSet" />
+      <End Role="Items" EntitySet="ItemsSet" />
+    </AssociationSet>
+    <EntitySet Name="KeysSet" EntityType="Object87Bot.Keys" />
+    <AssociationSet Name="ItemsKeys" Association="Object87Bot.ItemsKeys">
+      <End Role="Items" EntitySet="ItemsSet" />
+      <End Role="Keys" EntitySet="KeysSet" />
+    </AssociationSet>
+    <EntitySet Name="FlashlightSet" EntityType="Object87Bot.Flashlight" />
+    <AssociationSet Name="ItemsFlashlight" Association="Object87Bot.ItemsFlashlight">
+      <End Role="Items" EntitySet="ItemsSet" />
+      <End Role="Flashlight" EntitySet="FlashlightSet" />
+    </AssociationSet>
+    <EntitySet Name="BlueKeySet" EntityType="Object87Bot.BlueKey" />
+    <EntitySet Name="GreenKeySet" EntityType="Object87Bot.GreenKey" />
+    <AssociationSet Name="KeysBlueKey" Association="Object87Bot.KeysBlueKey">
+      <End Role="Keys" EntitySet="KeysSet" />
+      <End Role="BlueKey" EntitySet="BlueKeySet" />
+    </AssociationSet>
+    <AssociationSet Name="KeysGreenKey" Association="Object87Bot.KeysGreenKey">
+      <End Role="Keys" EntitySet="KeysSet" />
+      <End Role="GreenKey" EntitySet="GreenKeySet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="Location" Type="Int32" Nullable="false" />
+    <Property Name="Position" Type="Int32" Nullable="false" />
+    <Property Name="Health" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Items" Relationship="Object87Bot.PlayersItems" FromRole="Players" ToRole="Items" />
+  </EntityType>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Players" Relationship="Object87Bot.PlayersItems" FromRole="Items" ToRole="Players" />
+    <NavigationProperty Name="Keys" Relationship="Object87Bot.ItemsKeys" FromRole="Items" ToRole="Keys" />
+    <NavigationProperty Name="Flashlight" Relationship="Object87Bot.ItemsFlashlight" FromRole="Items" ToRole="Flashlight" />
+  </EntityType>
+  <Association Name="PlayersItems">
+    <End Type="Object87Bot.Player" Role="Players" Multiplicity="1" />
+    <End Type="Object87Bot.Items" Role="Items" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Keys">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Items" Relationship="Object87Bot.ItemsKeys" FromRole="Keys" ToRole="Items" />
+    <NavigationProperty Name="BlueKey" Relationship="Object87Bot.KeysBlueKey" FromRole="Keys" ToRole="BlueKey" />
+    <NavigationProperty Name="GreenKey" Relationship="Object87Bot.KeysGreenKey" FromRole="Keys" ToRole="GreenKey" />
+  </EntityType>
+  <Association Name="ItemsKeys">
+    <End Type="Object87Bot.Items" Role="Items" Multiplicity="1" />
+    <End Type="Object87Bot.Keys" Role="Keys" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Flashlight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Items" Relationship="Object87Bot.ItemsFlashlight" FromRole="Flashlight" ToRole="Items" />
+  </EntityType>
+  <Association Name="ItemsFlashlight">
+    <End Type="Object87Bot.Items" Role="Items" Multiplicity="1" />
+    <End Type="Object87Bot.Flashlight" Role="Flashlight" Multiplicity="0..1" />
+  </Association>
+  <EntityType Name="BlueKey">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Keys" Relationship="Object87Bot.KeysBlueKey" FromRole="BlueKey" ToRole="Keys" />
+  </EntityType>
+  <EntityType Name="GreenKey">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Keys" Relationship="Object87Bot.KeysGreenKey" FromRole="GreenKey" ToRole="Keys" />
+  </EntityType>
+  <Association Name="KeysBlueKey">
+    <End Type="Object87Bot.Keys" Role="Keys" Multiplicity="1" />
+    <End Type="Object87Bot.BlueKey" Role="BlueKey" Multiplicity="0..1" />
+  </Association>
+  <Association Name="KeysGreenKey">
+    <End Type="Object87Bot.Keys" Role="Keys" Multiplicity="1" />
+    <End Type="Object87Bot.GreenKey" Role="GreenKey" Multiplicity="0..1" />
+  </Association>
+</Schema>

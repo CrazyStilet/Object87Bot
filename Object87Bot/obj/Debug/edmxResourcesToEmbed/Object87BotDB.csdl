@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Object87BotDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Object87BotDBContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PlayerSet" EntityType="Object87BotDB.Player" />
+    <EntitySet Name="InventorySet" EntityType="Object87BotDB.Inventory" />
+    <AssociationSet Name="PlayerInventory" Association="Object87BotDB.PlayerInventory">
+      <End Role="Player" EntitySet="PlayerSet" />
+      <End Role="Inventory" EntitySet="InventorySet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="Location" Type="Int32" Nullable="false" />
+    <Property Name="Position" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Inventory" Relationship="Object87BotDB.PlayerInventory" FromRole="Player" ToRole="Inventory" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Player" Relationship="Object87BotDB.PlayerInventory" FromRole="Inventory" ToRole="Player" />
+  </EntityType>
+  <Association Name="PlayerInventory">
+    <End Type="Object87BotDB.Player" Role="Player" Multiplicity="1" />
+    <End Type="Object87BotDB.Inventory" Role="Inventory" Multiplicity="*" />
+  </Association>
+</Schema>

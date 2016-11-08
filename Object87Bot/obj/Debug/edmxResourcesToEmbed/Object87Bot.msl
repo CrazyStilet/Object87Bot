@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Object87BotStoreContainer" CdmEntityContainer="Object87BotContainer">
+    <EntitySetMapping Name="PlayerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Object87Bot.Player)">
+        <MappingFragment StoreEntitySet="PlayerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Health" ColumnName="Health" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Object87Bot.Items)">
+        <MappingFragment StoreEntitySet="ItemsSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeysSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Object87Bot.Keys)">
+        <MappingFragment StoreEntitySet="KeysSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FlashlightSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Object87Bot.Flashlight)">
+        <MappingFragment StoreEntitySet="FlashlightSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BlueKeySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Object87Bot.BlueKey)">
+        <MappingFragment StoreEntitySet="BlueKeySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GreenKeySet">
+      <EntityTypeMapping TypeName="IsTypeOf(Object87Bot.GreenKey)">
+        <MappingFragment StoreEntitySet="GreenKeySet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PlayersItems" TypeName="Object87Bot.PlayersItems" StoreEntitySet="ItemsSet">
+      <EndProperty Name="Players">
+        <ScalarProperty Name="Id" ColumnName="Players_Id" />
+      </EndProperty>
+      <EndProperty Name="Items">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ItemsKeys" TypeName="Object87Bot.ItemsKeys" StoreEntitySet="KeysSet">
+      <EndProperty Name="Items">
+        <ScalarProperty Name="Id" ColumnName="Items_Id" />
+      </EndProperty>
+      <EndProperty Name="Keys">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ItemsFlashlight" TypeName="Object87Bot.ItemsFlashlight" StoreEntitySet="FlashlightSet">
+      <EndProperty Name="Items">
+        <ScalarProperty Name="Id" ColumnName="Items_Id" />
+      </EndProperty>
+      <EndProperty Name="Flashlight">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="KeysBlueKey" TypeName="Object87Bot.KeysBlueKey" StoreEntitySet="BlueKeySet">
+      <EndProperty Name="Keys">
+        <ScalarProperty Name="Id" ColumnName="Keys_Id" />
+      </EndProperty>
+      <EndProperty Name="BlueKey">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="KeysGreenKey" TypeName="Object87Bot.KeysGreenKey" StoreEntitySet="GreenKeySet">
+      <EndProperty Name="Keys">
+        <ScalarProperty Name="Id" ColumnName="Keys_Id" />
+      </EndProperty>
+      <EndProperty Name="GreenKey">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
