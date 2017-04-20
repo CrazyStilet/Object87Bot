@@ -6,7 +6,7 @@ namespace Object87Bot
 {
     public partial class Service1 : IService
     {
-        private static readonly Telegram.Bot.TelegramBotClient bot = new Telegram.Bot.TelegramBotClient("299223893:AAF8ccSCQmE42WDvWABNrXsROhaNzAaIZ8I");
+        private static readonly Telegram.Bot.TelegramBotClient bot = new Telegram.Bot.TelegramBotClient("");
 
         Object87BotModelContainer context = new Object87BotModelContainer();
 
